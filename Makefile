@@ -12,7 +12,7 @@ export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-hsdp
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/philips-software/terraform-provider-hsdp/releases/download/v0.32.0
 export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-hsdp_v0.32.0
 
-PLATFORMS ?= linux_amd64 linux_arm64
+PLATFORMS ?= linux_amd64 #linux_arm64
 
 # -include will silently skip missing files, which allows us
 # to load those files with a target in the Makefile. If only
