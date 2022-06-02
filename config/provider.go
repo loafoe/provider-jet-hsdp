@@ -23,7 +23,7 @@ import (
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	iam "github.com/crossplane-contrib/provider-jet-hsdp/config/iam_group"
+	iamgroup "github.com/crossplane-contrib/provider-jet-hsdp/config/iam_group"
 )
 
 const (
@@ -51,7 +51,7 @@ func GetProvider() *tjconfig.Provider {
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
-		iam.Configure,
+		iamgroup.Configure,
 	} {
 		configure(pc)
 	}
