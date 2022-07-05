@@ -1,4 +1,4 @@
-package repository
+package iamgroup
 
 import "github.com/crossplane/terrajet/pkg/config"
 
