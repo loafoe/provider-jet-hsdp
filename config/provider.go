@@ -20,10 +20,9 @@ import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
+	iamgroup "github.com/crossplane-contrib/provider-jet-hsdp/config/iamgroup"
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
-	iamgroup "github.com/crossplane-contrib/provider-jet-hsdp/config/iam_group"
 )
 
 const (
