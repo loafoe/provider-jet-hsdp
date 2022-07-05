@@ -95,6 +95,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			"cartel_token":        hsdpCreds["cartel_token"],
 			"uaa_username":        hsdpCreds["uaa_username"],
 			"uaa_password":        hsdpCreds["uaa_password"],
+			"debug_log":           hsdpCreds["debug_log"],
 		}
 		return ps, nil
 	}
