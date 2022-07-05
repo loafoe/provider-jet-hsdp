@@ -22,6 +22,7 @@ import (
 	"github.com/crossplane/terrajet/pkg/controller"
 
 	group "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iamgroup/group"
+	org "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iamorg/org"
 	providerconfig "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/providerconfig"
 )
 
@@ -30,6 +31,7 @@ import (
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		group.Setup,
+		org.Setup,
 		providerconfig.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

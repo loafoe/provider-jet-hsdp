@@ -21,6 +21,7 @@ import (
 	_ "embed"
 
 	"github.com/crossplane-contrib/provider-jet-hsdp/config/iamgroup"
+	"github.com/crossplane-contrib/provider-jet-hsdp/config/iamorg"
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -46,11 +47,13 @@ func GetProvider() *tjconfig.Provider {
 		tjconfig.WithDefaultResourceFn(defaultResourceFn),
 		tjconfig.WithIncludeList([]string{
 			"hsdp_iam_group$",
+			"hsdp_iam_org$",
 		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
 		iamgroup.Configure,
+		iamorg.Configure,
 	} {
 		configure(pc)
 	}
