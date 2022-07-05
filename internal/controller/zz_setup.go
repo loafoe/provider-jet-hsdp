@@ -21,7 +21,7 @@ import (
 
 	"github.com/crossplane/terrajet/pkg/controller"
 
-	group "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam_group/group"
+	group "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iamgroup/group"
 	providerconfig "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/providerconfig"
 )
 

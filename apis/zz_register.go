@@ -22,7 +22,7 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "github.com/crossplane-contrib/provider-jet-hsdp/apis/iam_group/v1alpha1"
+	v1alpha1 "github.com/crossplane-contrib/provider-jet-hsdp/apis/iamgroup/v1alpha1"
 	v1alpha1apis "github.com/crossplane-contrib/provider-jet-hsdp/apis/v1alpha1"
 )
 
