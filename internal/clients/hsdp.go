@@ -27,7 +27,7 @@ import (
 
 	"github.com/crossplane/terrajet/pkg/terraform"
 
-	"github.com/crossplane-contrib/provider-jet-template/apis/v1alpha1"
+	"github.com/crossplane-contrib/provider-jet-hsdp/apis/v1alpha1"
 )
 
 const (
@@ -36,7 +36,7 @@ const (
 	errGetProviderConfig    = "cannot get referenced ProviderConfig"
 	errTrackUsage           = "cannot track ProviderConfig usage"
 	errExtractCredentials   = "cannot extract credentials"
-	errUnmarshalCredentials = "cannot unmarshal template credentials as JSON"
+	errUnmarshalCredentials = "cannot unmarshal hsdp credentials as JSON"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -69,8 +69,8 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if err != nil {
 			return ps, errors.Wrap(err, errExtractCredentials)
 		}
-		templateCreds := map[string]string{}
-		if err := json.Unmarshal(data, &templateCreds); err != nil {
+		hsdpCreds := map[string]string{}
+		if err := json.Unmarshal(data, &hsdpCreds); err != nil {
 			return ps, errors.Wrap(err, errUnmarshalCredentials)
 		}
 
@@ -79,14 +79,24 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		// credentials via the environment variables. You should specify
 		// credentials via the Terraform main.tf.json instead.
 		/*ps.Env = []string{
-			fmt.Sprintf("%s=%s", "HASHICUPS_USERNAME", templateCreds["username"]),
-			fmt.Sprintf("%s=%s", "HASHICUPS_PASSWORD", templateCreds["password"]),
+			fmt.Sprintf("%s=%s", "HASHICUPS_USERNAME", hsdpCreds["username"]),
+			fmt.Sprintf("%s=%s", "HASHICUPS_PASSWORD", hsdpCreds["password"]),
 		}*/
 		// set credentials in Terraform provider configuration
-		/*ps.Configuration = map[string]interface{}{
-			"username": templateCreds["username"],
-			"password": templateCreds["password"],
-		}*/
+		ps.Configuration = map[string]interface{}{
+			"region":              hsdpCreds["region"],
+			"environment":         hsdpCreds["environment"],
+			"service_id":          hsdpCreds["service_id"],
+			"service_private_key": hsdpCreds["service_private_key"],
+			"oauth2_client_id":    hsdpCreds["oauth2_client_id"],
+			"oauth2_password":     hsdpCreds["oauth2_password"],
+			"cartel_host":         hsdpCreds["cartel_host"],
+			"cartel_secret":       hsdpCreds["cartel_secret"],
+			"cartel_token":        hsdpCreds["cartel_token"],
+			"uaa_username":        hsdpCreds["uaa_username"],
+			"uaa_password":        hsdpCreds["uaa_password"],
+			"debug_log":           hsdpCreds["debug_log"],
+		}
 		return ps, nil
 	}
 }

@@ -25,62 +25,79 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ResourceObservation struct {
+type GroupObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
-type ResourceParameters struct {
+type GroupParameters struct {
 
-	// A map of arbitrary strings that, when changed, will force the null resource to be replaced, re-running any associated provisioners.
 	// +kubebuilder:validation:Optional
-	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DriftDetection *bool `json:"driftDetection,omitempty" tf:"drift_detection,omitempty"`
+
+	// +kubebuilder:validation:Required
+	ManagingOrganization *string `json:"managingOrganization" tf:"managing_organization,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Roles []*string `json:"roles" tf:"roles,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 
-// ResourceSpec defines the desired state of Resource
-type ResourceSpec struct {
+// GroupSpec defines the desired state of Group
+type GroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     ResourceParameters `json:"forProvider"`
+	ForProvider     GroupParameters `json:"forProvider"`
 }
 
-// ResourceStatus defines the observed state of Resource.
-type ResourceStatus struct {
+// GroupStatus defines the observed state of Group.
+type GroupStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        ResourceObservation `json:"atProvider,omitempty"`
+	AtProvider        GroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// Resource is the Schema for the Resources API
+// Group is the Schema for the Groups API
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,templatejet}
-type Resource struct {
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,hsdpjet}
+type Group struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceSpec   `json:"spec"`
-	Status            ResourceStatus `json:"status,omitempty"`
+	Spec              GroupSpec   `json:"spec"`
+	Status            GroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ResourceList contains a list of Resources
-type ResourceList struct {
+// GroupList contains a list of Groups
+type GroupList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Resource `json:"items"`
+	Items           []Group `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	Resource_Kind             = "Resource"
-	Resource_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Resource_Kind}.String()
-	Resource_KindAPIVersion   = Resource_Kind + "." + CRDGroupVersion.String()
-	Resource_GroupVersionKind = CRDGroupVersion.WithKind(Resource_Kind)
+	Group_Kind             = "Group"
+	Group_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Group_Kind}.String()
+	Group_KindAPIVersion   = Group_Kind + "." + CRDGroupVersion.String()
+	Group_GroupVersionKind = CRDGroupVersion.WithKind(Group_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&Resource{}, &ResourceList{})
+	SchemeBuilder.Register(&Group{}, &GroupList{})
 }

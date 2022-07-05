@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: resources.null.template.jet.crossplane.io
+  name: groups.iam.hsdp.jet.crossplane.io
 spec:
-  group: null.template.jet.crossplane.io
+  group: iam.hsdp.jet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
-    - templatejet
-    kind: Resource
-    listKind: ResourceList
-    plural: resources
-    singular: resource
+    - hsdpjet
+    kind: Group
+    listKind: GroupList
+    plural: groups
+    singular: group
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Resource is the Schema for the Resources API
+        description: Group is the Schema for the Groups API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ResourceSpec defines the desired state of Resource
+            description: GroupSpec defines the desired state of Group
             properties:
               deletionPolicy:
                 default: Delete
@@ -63,13 +63,30 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  triggers:
-                    additionalProperties:
+                  description:
+                    type: string
+                  driftDetection:
+                    type: boolean
+                  managingOrganization:
+                    type: string
+                  name:
+                    type: string
+                  roles:
+                    items:
                       type: string
-                    description: A map of arbitrary strings that, when changed, will
-                      force the null resource to be replaced, re-running any associated
-                      provisioners.
-                    type: object
+                    type: array
+                  services:
+                    items:
+                      type: string
+                    type: array
+                  users:
+                    items:
+                      type: string
+                    type: array
+                required:
+                - managingOrganization
+                - name
+                - roles
                 type: object
               providerConfigRef:
                 default:
@@ -168,7 +185,7 @@ spec:
             - forProvider
             type: object
           status:
-            description: ResourceStatus defines the observed state of Resource.
+            description: GroupStatus defines the observed state of Group.
             properties:
               atProvider:
                 properties:

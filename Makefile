@@ -1,18 +1,18 @@
 # ====================================================================================
 # Setup Project
 
-PROJECT_NAME := provider-jet-template
+PROJECT_NAME := provider-jet-hsdp
 PROJECT_REPO := github.com/crossplane-contrib/$(PROJECT_NAME)
 
-export TERRAFORM_VERSION := 1.1.6
+export TERRAFORM_VERSION := 1.2.1
 
-export TERRAFORM_PROVIDER_SOURCE := hashicorp/null
-export TERRAFORM_PROVIDER_VERSION := 3.1.0
-export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-null
-export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://releases.hashicorp.com/terraform-provider-null/3.1.0
-export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-null_v3.1.0_x5
+export TERRAFORM_PROVIDER_SOURCE := philips-software/hsdp
+export TERRAFORM_PROVIDER_VERSION := 0.35.0
+export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-hsdp
+export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/philips-software/terraform-provider-hsdp/releases/download/v${TERRAFORM_PROVIDER_VERSION}
+export TERRAFORM_NATIVE_PROVIDER_BINARY := terraform-provider-hsdp_v${TERRAFORM_PROVIDER_VERSION}
 
-PLATFORMS ?= linux_amd64 linux_arm64
+PLATFORMS ?= linux_amd64 #linux_arm64
 
 # -include will silently skip missing files, which allows us
 # to load those files with a target in the Makefile. If only
@@ -52,7 +52,7 @@ GO111MODULE = on
 # Setup Images
 
 DOCKER_REGISTRY ?= crossplane
-IMAGES = provider-jet-template provider-jet-template-controller
+IMAGES = provider-jet-hsdp provider-jet-hsdp-controller
 -include build/makelib/image.mk
 
 # ====================================================================================

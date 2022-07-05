@@ -20,15 +20,15 @@ import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
+	"github.com/crossplane-contrib/provider-jet-hsdp/config/iamgroup"
+	"github.com/crossplane-contrib/provider-jet-hsdp/config/iamorg"
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
-	"github.com/crossplane-contrib/provider-jet-template/config/null"
 )
 
 const (
-	resourcePrefix = "template"
-	modulePath     = "github.com/crossplane-contrib/provider-jet-template"
+	resourcePrefix = "hsdp"
+	modulePath     = "github.com/crossplane-contrib/provider-jet-hsdp"
 )
 
 //go:embed schema.json
@@ -44,11 +44,16 @@ func GetProvider() *tjconfig.Provider {
 	}
 
 	pc := tjconfig.NewProviderWithSchema([]byte(providerSchema), resourcePrefix, modulePath,
-		tjconfig.WithDefaultResourceFn(defaultResourceFn))
+		tjconfig.WithDefaultResourceFn(defaultResourceFn),
+		tjconfig.WithIncludeList([]string{
+			"hsdp_iam_group$",
+			"hsdp_iam_org$",
+		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
-		null.Configure,
+		iamgroup.Configure,
+		iamorg.Configure,
 	} {
 		configure(pc)
 	}
