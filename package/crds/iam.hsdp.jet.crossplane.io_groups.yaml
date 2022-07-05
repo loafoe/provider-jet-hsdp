@@ -5,9 +5,9 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: groups.iamgroup.hsdp.jet.crossplane.io
+  name: groups.iam.hsdp.jet.crossplane.io
 spec:
-  group: iamgroup.hsdp.jet.crossplane.io
+  group: iam.hsdp.jet.crossplane.io
   names:
     categories:
     - crossplane
@@ -69,6 +69,8 @@ spec:
                     type: boolean
                   managingOrganization:
                     type: string
+                  name:
+                    type: string
                   roles:
                     items:
                       type: string
@@ -83,6 +85,7 @@ spec:
                     type: array
                 required:
                 - managingOrganization
+                - name
                 - roles
                 type: object
               providerConfigRef:

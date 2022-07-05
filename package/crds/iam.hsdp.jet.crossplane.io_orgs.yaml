@@ -5,9 +5,9 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: orgs.iamorg.hsdp.jet.crossplane.io
+  name: orgs.iam.hsdp.jet.crossplane.io
 spec:
-  group: iamorg.hsdp.jet.crossplane.io
+  group: iam.hsdp.jet.crossplane.io
   names:
     categories:
     - crossplane
@@ -71,12 +71,16 @@ spec:
                     type: string
                   isRootOrg:
                     type: boolean
+                  name:
+                    type: string
                   parentOrgId:
                     type: string
                   type:
                     type: string
                   waitForDelete:
                     type: boolean
+                required:
+                - name
                 type: object
               providerConfigRef:
                 default:

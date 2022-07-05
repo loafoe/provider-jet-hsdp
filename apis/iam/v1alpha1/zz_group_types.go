@@ -25,81 +25,79 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type OrgObservation struct {
-	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
-
+type GroupObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
-type OrgParameters struct {
+type GroupParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+	DriftDetection *bool `json:"driftDetection,omitempty" tf:"drift_detection,omitempty"`
+
+	// +kubebuilder:validation:Required
+	ManagingOrganization *string `json:"managingOrganization" tf:"managing_organization,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Roles []*string `json:"roles" tf:"roles,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
+	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IsRootOrg *bool `json:"isRootOrg,omitempty" tf:"is_root_org,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ParentOrgID *string `json:"parentOrgId,omitempty" tf:"parent_org_id,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	WaitForDelete *bool `json:"waitForDelete,omitempty" tf:"wait_for_delete,omitempty"`
+	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 
-// OrgSpec defines the desired state of Org
-type OrgSpec struct {
+// GroupSpec defines the desired state of Group
+type GroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     OrgParameters `json:"forProvider"`
+	ForProvider     GroupParameters `json:"forProvider"`
 }
 
-// OrgStatus defines the observed state of Org.
-type OrgStatus struct {
+// GroupStatus defines the observed state of Group.
+type GroupStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        OrgObservation `json:"atProvider,omitempty"`
+	AtProvider        GroupObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// Org is the Schema for the Orgs API
+// Group is the Schema for the Groups API
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,hsdpjet}
-type Org struct {
+type Group struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OrgSpec   `json:"spec"`
-	Status            OrgStatus `json:"status,omitempty"`
+	Spec              GroupSpec   `json:"spec"`
+	Status            GroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// OrgList contains a list of Orgs
-type OrgList struct {
+// GroupList contains a list of Groups
+type GroupList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Org `json:"items"`
+	Items           []Group `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	Org_Kind             = "Org"
-	Org_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Org_Kind}.String()
-	Org_KindAPIVersion   = Org_Kind + "." + CRDGroupVersion.String()
-	Org_GroupVersionKind = CRDGroupVersion.WithKind(Org_Kind)
+	Group_Kind             = "Group"
+	Group_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Group_Kind}.String()
+	Group_KindAPIVersion   = Group_Kind + "." + CRDGroupVersion.String()
+	Group_GroupVersionKind = CRDGroupVersion.WithKind(Group_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&Org{}, &OrgList{})
+	SchemeBuilder.Register(&Group{}, &GroupList{})
 }

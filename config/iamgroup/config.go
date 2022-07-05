@@ -7,6 +7,7 @@ import (
 // Configure configures individual resources by adding custom ResourceConfigurators.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("hsdp_iam_group", func(r *config.Resource) {
-		r.ShortGroup = "iamGroup"
+		r.ShortGroup = "iam"
+		r.ExternalName = config.IdentifierFromProvider
 	})
 }
