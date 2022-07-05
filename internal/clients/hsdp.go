@@ -83,10 +83,19 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			fmt.Sprintf("%s=%s", "HASHICUPS_PASSWORD", hsdpCreds["password"]),
 		}*/
 		// set credentials in Terraform provider configuration
-		/*ps.Configuration = map[string]interface{}{
-			"username": hsdpCreds["username"],
-			"password": hsdpCreds["password"],
-		}*/
+		ps.Configuration = map[string]interface{}{
+			"region":              hsdpCreds["region"],
+			"environment":         hsdpCreds["environment"],
+			"service_id":          hsdpCreds["service_id"],
+			"service_private_key": hsdpCreds["service_private_key"],
+			"oauth2_client_id":    hsdpCreds["oauth2_client_id"],
+			"oauth2_password":     hsdpCreds["oauth2_password"],
+			"cartel_host":         hsdpCreds["cartel_host"],
+			"cartel_secret":       hsdpCreds["cartel_secret"],
+			"cartel_token":        hsdpCreds["cartel_token"],
+			"uaa_username":        hsdpCreds["uaa_username"],
+			"uaa_password":        hsdpCreds["uaa_password"],
+		}
 		return ps, nil
 	}
 }
