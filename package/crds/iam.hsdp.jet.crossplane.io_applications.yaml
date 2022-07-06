@@ -67,10 +67,13 @@ spec:
                     type: string
                   globalReferenceId:
                     type: string
+                  name:
+                    type: string
                   propositionId:
                     type: string
                 required:
                 - description
+                - name
                 - propositionId
                 type: object
               providerConfigRef:

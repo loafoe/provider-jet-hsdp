@@ -38,6 +38,9 @@ type PropositionParameters struct {
 	GlobalReferenceID *string `json:"globalReferenceId,omitempty" tf:"global_reference_id,omitempty"`
 
 	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Required
 	OrganizationID *string `json:"organizationId" tf:"organization_id,omitempty"`
 }
 

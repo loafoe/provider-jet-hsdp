@@ -118,6 +118,11 @@ func (in *ApplicationParameters) DeepCopyInto(out *ApplicationParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.PropositionID != nil {
 		in, out := &in.PropositionID, &out.PropositionID
 		*out = new(string)
@@ -612,6 +617,11 @@ func (in *PropositionParameters) DeepCopyInto(out *PropositionParameters) {
 	}
 	if in.GlobalReferenceID != nil {
 		in, out := &in.GlobalReferenceID, &out.GlobalReferenceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}

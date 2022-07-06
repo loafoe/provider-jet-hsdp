@@ -59,6 +59,8 @@ func GetProvider() *tjconfig.Provider {
 		iam.RoleConfigure,
 		iam.OrgConfigure,
 		iam.ServiceConfigure,
+		iam.PropositionConfigure,
+		iam.ApplicationConfigure,
 	} {
 		configure(pc)
 	}
