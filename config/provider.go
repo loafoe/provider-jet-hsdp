@@ -20,8 +20,7 @@ import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
-	"github.com/crossplane-contrib/provider-jet-hsdp/config/iamgroup"
-	"github.com/crossplane-contrib/provider-jet-hsdp/config/iamorg"
+	"github.com/crossplane-contrib/provider-jet-hsdp/config/iam"
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
@@ -48,12 +47,14 @@ func GetProvider() *tjconfig.Provider {
 		tjconfig.WithIncludeList([]string{
 			"hsdp_iam_group$",
 			"hsdp_iam_org$",
+			"hsdp_iam_role$",
 		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
-		iamgroup.Configure,
-		iamorg.Configure,
+		iam.GroupConfigure,
+		iam.RoleConfigure,
+		iam.OrgConfigure,
 	} {
 		configure(pc)
 	}

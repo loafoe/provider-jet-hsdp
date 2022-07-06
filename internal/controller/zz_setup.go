@@ -23,6 +23,7 @@ import (
 
 	group "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/group"
 	org "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/org"
+	role "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/role"
 	providerconfig "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/providerconfig"
 )
 
@@ -32,6 +33,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		group.Setup,
 		org.Setup,
+		role.Setup,
 		providerconfig.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
