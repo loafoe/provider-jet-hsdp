@@ -25,6 +25,32 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this Application.
+func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PropositionID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.propositionRef,
+		Selector:     mg.Spec.ForProvider.PropositionIDSelector,
+		To: reference.To{
+			List:    &PropositionList{},
+			Managed: &Proposition{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PropositionID")
+	}
+	mg.Spec.ForProvider.PropositionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.propositionRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Proposition.
 func (mg *Proposition) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

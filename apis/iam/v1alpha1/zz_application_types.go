@@ -40,8 +40,17 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// +kubebuilder:validation:Required
-	PropositionID *string `json:"propositionId" tf:"proposition_id,omitempty"`
+	// +crossplane:generate:reference:type=Proposition
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:refFieldName=propositionRef
+	// +kubebuilder:validation:Optional
+	PropositionID *string `json:"propositionId,omitempty" tf:"proposition_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PropositionIDSelector *v1.Selector `json:"propositionIdSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	propositionRef *v1.Reference `json:"propositionRef,omitempty" tf:"-"`
 }
 
 // ApplicationSpec defines the desired state of Application
