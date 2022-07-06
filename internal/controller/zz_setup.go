@@ -21,9 +21,12 @@ import (
 
 	"github.com/crossplane/terrajet/pkg/controller"
 
+	application "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/application"
 	group "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/group"
 	org "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/org"
+	proposition "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/proposition"
 	role "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/role"
+	service "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/service"
 	providerconfig "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/providerconfig"
 )
 
@@ -31,9 +34,12 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		application.Setup,
 		group.Setup,
 		org.Setup,
+		proposition.Setup,
 		role.Setup,
+		service.Setup,
 		providerconfig.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
