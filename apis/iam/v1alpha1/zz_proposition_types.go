@@ -40,8 +40,17 @@ type PropositionParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// +kubebuilder:validation:Required
-	OrganizationID *string `json:"organizationId" tf:"organization_id,omitempty"`
+	// +crossplane:generate:reference:type=Org
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:refFieldName=organizationRef
+	// +kubebuilder:validation:Optional
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	OrganizationIDSelector *v1.Selector `json:"organizationIdSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	organizationRef *v1.Reference `json:"organizationRef,omitempty" tf:"-"`
 }
 
 // PropositionSpec defines the desired state of Proposition
