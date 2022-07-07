@@ -52,11 +52,29 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	OrganizationRef *v1.Reference `json:"organizationRef,omitempty" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	Roles []*string `json:"roles" tf:"roles,omitempty"`
+	// +kubebuilder:validation:Optional
+	RoleRefs []v1.Reference `json:"roleRefs,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:refFieldName=RoleRefs
+	// +kubebuilder:validation:Optional
+	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	RolesSelector *v1.Selector `json:"rolesSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ServiceRefs []v1.Reference `json:"serviceRefs,omitempty" tf:"-"`
+
+	// +crossplane:generate:reference:type=Service
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:refFieldName=ServiceRefs
+	// +kubebuilder:validation:Optional
 	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ServicesSelector *v1.Selector `json:"servicesSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`

@@ -15,5 +15,15 @@ func GroupConfigure(p *config.Provider) {
 			Extractor:    rconfig.ExtractResourceIDFuncPath,
 			RefFieldName: "OrganizationRef",
 		}
+		r.References["services"] = config.Reference{
+			Type:         "Service",
+			Extractor:    rconfig.ExtractResourceIDFuncPath,
+			RefFieldName: "ServiceRefs",
+		}
+		r.References["roles"] = config.Reference{
+			Type:         "Role",
+			Extractor:    rconfig.ExtractResourceIDFuncPath,
+			RefFieldName: "RoleRefs",
+		}
 	})
 }
