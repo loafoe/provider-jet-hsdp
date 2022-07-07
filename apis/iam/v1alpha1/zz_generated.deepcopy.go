@@ -133,8 +133,8 @@ func (in *ApplicationParameters) DeepCopyInto(out *ApplicationParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.propositionRef != nil {
-		in, out := &in.propositionRef, &out.propositionRef
+	if in.PropositionRef != nil {
+		in, out := &in.PropositionRef, &out.PropositionRef
 		*out = new(v1.Reference)
 		**out = **in
 	}
@@ -645,8 +645,8 @@ func (in *PropositionParameters) DeepCopyInto(out *PropositionParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.organizationRef != nil {
-		in, out := &in.organizationRef, &out.organizationRef
+	if in.OrganizationRef != nil {
+		in, out := &in.OrganizationRef, &out.OrganizationRef
 		*out = new(v1.Reference)
 		**out = **in
 	}

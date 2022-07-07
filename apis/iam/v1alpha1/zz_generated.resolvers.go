@@ -35,7 +35,7 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PropositionID),
 		Extract:      rconfig.ExtractResourceID(),
-		Reference:    mg.Spec.ForProvider.propositionRef,
+		Reference:    mg.Spec.ForProvider.PropositionRef,
 		Selector:     mg.Spec.ForProvider.PropositionIDSelector,
 		To: reference.To{
 			List:    &PropositionList{},
@@ -46,7 +46,7 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 		return errors.Wrap(err, "mg.Spec.ForProvider.PropositionID")
 	}
 	mg.Spec.ForProvider.PropositionID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.propositionRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.PropositionRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -61,7 +61,7 @@ func (mg *Proposition) ResolveReferences(ctx context.Context, c client.Reader) e
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OrganizationID),
 		Extract:      rconfig.ExtractResourceID(),
-		Reference:    mg.Spec.ForProvider.organizationRef,
+		Reference:    mg.Spec.ForProvider.OrganizationRef,
 		Selector:     mg.Spec.ForProvider.OrganizationIDSelector,
 		To: reference.To{
 			List:    &OrgList{},
@@ -72,7 +72,7 @@ func (mg *Proposition) ResolveReferences(ctx context.Context, c client.Reader) e
 		return errors.Wrap(err, "mg.Spec.ForProvider.OrganizationID")
 	}
 	mg.Spec.ForProvider.OrganizationID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.organizationRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.OrganizationRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -42,7 +42,7 @@ type ApplicationParameters struct {
 
 	// +crossplane:generate:reference:type=Proposition
 	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
-	// +crossplane:generate:reference:refFieldName=propositionRef
+	// +crossplane:generate:reference:refFieldName=PropositionRef
 	// +kubebuilder:validation:Optional
 	PropositionID *string `json:"propositionId,omitempty" tf:"proposition_id,omitempty"`
 
@@ -50,7 +50,7 @@ type ApplicationParameters struct {
 	PropositionIDSelector *v1.Selector `json:"propositionIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	propositionRef *v1.Reference `json:"propositionRef,omitempty" tf:"-"`
+	PropositionRef *v1.Reference `json:"propositionRef,omitempty" tf:"-"`
 }
 
 // ApplicationSpec defines the desired state of Application

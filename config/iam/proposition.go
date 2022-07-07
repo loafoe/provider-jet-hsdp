@@ -13,7 +13,7 @@ func PropositionConfigure(p *config.Provider) {
 		r.References["organization_id"] = config.Reference{
 			Type:         "Org",
 			Extractor:    rconfig.ExtractResourceIDFuncPath,
-			RefFieldName: "organizationRef",
+			RefFieldName: "OrganizationRef",
 		}
 	})
 }

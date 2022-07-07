@@ -13,7 +13,7 @@ func ApplicationConfigure(p *config.Provider) {
 		r.References["proposition_id"] = config.Reference{
 			Type:         "Proposition",
 			Extractor:    rconfig.ExtractResourceIDFuncPath,
-			RefFieldName: "propositionRef",
+			RefFieldName: "PropositionRef",
 		}
 	})
 }
