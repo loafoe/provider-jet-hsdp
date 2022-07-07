@@ -15,5 +15,15 @@ func ServiceConfigure(p *config.Provider) {
 			Extractor:    rconfig.ExtractResourceIDFuncPath,
 			RefFieldName: "ApplicationRef",
 		}
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["service_id"].(string); ok {
+				conn["service_id"] = []byte(a)
+			}
+			if a, ok := attr["service_private_key"].(string); ok {
+				conn["service_private_key"] = []byte(a)
+			}
+			return conn, nil
+		}
 	})
 }
