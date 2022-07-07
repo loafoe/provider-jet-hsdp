@@ -20,7 +20,7 @@ func ServiceConfigure(p *config.Provider) {
 			if a, ok := attr["service_id"].(string); ok {
 				conn["service_id"] = []byte(a)
 			}
-			if a, ok := attr["service_private_key"].(string); ok {
+			if a, ok := attr["private_key"].(string); ok {
 				conn["service_private_key"] = []byte(a)
 			}
 			return conn, nil
