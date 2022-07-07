@@ -37,11 +37,20 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	DriftDetection *bool `json:"driftDetection,omitempty" tf:"drift_detection,omitempty"`
 
-	// +kubebuilder:validation:Required
-	ManagingOrganization *string `json:"managingOrganization" tf:"managing_organization,omitempty"`
+	// +crossplane:generate:reference:type=Org
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:refFieldName=OrganizationRef
+	// +kubebuilder:validation:Optional
+	ManagingOrganization *string `json:"managingOrganization,omitempty" tf:"managing_organization,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ManagingOrganizationSelector *v1.Selector `json:"managingOrganizationSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	OrganizationRef *v1.Reference `json:"organizationRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Roles []*string `json:"roles" tf:"roles,omitempty"`

@@ -34,11 +34,20 @@ type RoleParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// +kubebuilder:validation:Required
-	ManagingOrganization *string `json:"managingOrganization" tf:"managing_organization,omitempty"`
+	// +crossplane:generate:reference:type=Org
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:refFieldName=OrganizationRef
+	// +kubebuilder:validation:Optional
+	ManagingOrganization *string `json:"managingOrganization,omitempty" tf:"managing_organization,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ManagingOrganizationSelector *v1.Selector `json:"managingOrganizationSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	OrganizationRef *v1.Reference `json:"organizationRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Permissions []*string `json:"permissions" tf:"permissions,omitempty"`

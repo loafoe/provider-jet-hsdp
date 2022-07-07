@@ -35,8 +35,17 @@ type ServiceObservation struct {
 
 type ServiceParameters struct {
 
-	// +kubebuilder:validation:Required
-	ApplicationID *string `json:"applicationId" tf:"application_id,omitempty"`
+	// +crossplane:generate:reference:type=Application
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:refFieldName=ApplicationRef
+	// +kubebuilder:validation:Optional
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ApplicationRef *v1.Reference `json:"applicationRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	DefaultScopes []*string `json:"defaultScopes" tf:"default_scopes,omitempty"`

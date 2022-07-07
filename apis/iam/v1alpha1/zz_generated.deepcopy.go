@@ -281,9 +281,19 @@ func (in *GroupParameters) DeepCopyInto(out *GroupParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManagingOrganizationSelector != nil {
+		in, out := &in.ManagingOrganizationSelector, &out.ManagingOrganizationSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.OrganizationRef != nil {
+		in, out := &in.OrganizationRef, &out.OrganizationRef
+		*out = new(v1.Reference)
 		**out = **in
 	}
 	if in.Roles != nil {
@@ -788,9 +798,19 @@ func (in *RoleParameters) DeepCopyInto(out *RoleParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManagingOrganizationSelector != nil {
+		in, out := &in.ManagingOrganizationSelector, &out.ManagingOrganizationSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.OrganizationRef != nil {
+		in, out := &in.OrganizationRef, &out.OrganizationRef
+		*out = new(v1.Reference)
 		**out = **in
 	}
 	if in.Permissions != nil {
@@ -950,6 +970,16 @@ func (in *ServiceParameters) DeepCopyInto(out *ServiceParameters) {
 	if in.ApplicationID != nil {
 		in, out := &in.ApplicationID, &out.ApplicationID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ApplicationIDSelector != nil {
+		in, out := &in.ApplicationIDSelector, &out.ApplicationIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ApplicationRef != nil {
+		in, out := &in.ApplicationRef, &out.ApplicationRef
+		*out = new(v1.Reference)
 		**out = **in
 	}
 	if in.DefaultScopes != nil {
