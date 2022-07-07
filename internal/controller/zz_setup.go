@@ -22,6 +22,7 @@ import (
 	"github.com/crossplane/terrajet/pkg/controller"
 
 	application "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/application"
+	client "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/client"
 	group "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/group"
 	org "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/org"
 	proposition "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/proposition"
@@ -35,6 +36,7 @@ import (
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		application.Setup,
+		client.Setup,
 		group.Setup,
 		org.Setup,
 		proposition.Setup,

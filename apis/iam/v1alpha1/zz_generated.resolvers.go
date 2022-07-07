@@ -51,11 +51,38 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this Client.
+func (mg *Client) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ApplicationRef,
+		Selector:     mg.Spec.ForProvider.ApplicationIDSelector,
+		To: reference.To{
+			List:    &ApplicationList{},
+			Managed: &Application{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationID")
+	}
+	mg.Spec.ForProvider.ApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApplicationRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Group.
 func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -73,6 +100,38 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.ManagingOrganization = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.OrganizationRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Roles),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.ForProvider.RoleRefs,
+		Selector:      mg.Spec.ForProvider.RolesSelector,
+		To: reference.To{
+			List:    &RoleList{},
+			Managed: &Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Roles")
+	}
+	mg.Spec.ForProvider.Roles = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.RoleRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Services),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.ForProvider.ServiceRefs,
+		Selector:      mg.Spec.ForProvider.ServicesSelector,
+		To: reference.To{
+			List:    &ServiceList{},
+			Managed: &Service{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Services")
+	}
+	mg.Spec.ForProvider.Services = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ServiceRefs = mrsp.ResolvedReferences
 
 	return nil
 }

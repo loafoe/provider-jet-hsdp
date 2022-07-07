@@ -51,6 +51,7 @@ func GetProvider() *tjconfig.Provider {
 			"hsdp_iam_service$",
 			"hsdp_iam_proposition$",
 			"hsdp_iam_application$",
+			"hsdp_iam_client$",
 		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
@@ -61,6 +62,7 @@ func GetProvider() *tjconfig.Provider {
 		iam.ServiceConfigure,
 		iam.PropositionConfigure,
 		iam.ApplicationConfigure,
+		iam.ClientConfigure,
 	} {
 		configure(pc)
 	}
