@@ -26,6 +26,8 @@ import (
 )
 
 type ServiceObservation struct {
+	ExpiresOn *string `json:"expiresOn,omitempty" tf:"expires_on,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
@@ -53,9 +55,6 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Required
 	Description *string `json:"description" tf:"description,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	ExpiresOn *string `json:"expiresOn,omitempty" tf:"expires_on,omitempty"`
-
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -63,7 +62,7 @@ type ServiceParameters struct {
 	Scopes []*string `json:"scopes" tf:"scopes,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SelfManagedCertificate *string `json:"selfManagedCertificate,omitempty" tf:"self_managed_certificate,omitempty"`
+	SelfManagedExpiresOn *string `json:"selfManagedExpiresOn,omitempty" tf:"self_managed_expires_on,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	SelfManagedPrivateKeySecretRef *v1.SecretKeySelector `json:"selfManagedPrivateKeySecretRef,omitempty" tf:"-"`

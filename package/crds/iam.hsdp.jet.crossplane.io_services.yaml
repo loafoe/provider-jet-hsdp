@@ -94,15 +94,13 @@ spec:
                     type: array
                   description:
                     type: string
-                  expiresOn:
-                    type: string
                   name:
                     type: string
                   scopes:
                     items:
                       type: string
                     type: array
-                  selfManagedCertificate:
+                  selfManagedExpiresOn:
                     type: string
                   selfManagedPrivateKeySecretRef:
                     description: A SecretKeySelector is a reference to a secret key
@@ -233,6 +231,8 @@ spec:
             properties:
               atProvider:
                 properties:
+                  expiresOn:
+                    type: string
                   id:
                     type: string
                   organizationId:
