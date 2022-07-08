@@ -38,7 +38,6 @@ type GroupParameters struct {
 	DriftDetection *bool `json:"driftDetection,omitempty" tf:"drift_detection,omitempty"`
 
 	// +crossplane:generate:reference:type=Org
-	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
 	// +crossplane:generate:reference:refFieldName=OrganizationRef
 	// +kubebuilder:validation:Optional
 	ManagingOrganization *string `json:"managingOrganization,omitempty" tf:"managing_organization,omitempty"`
@@ -56,7 +55,6 @@ type GroupParameters struct {
 	RoleRefs []v1.Reference `json:"roleRefs,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
 	// +crossplane:generate:reference:refFieldName=RoleRefs
 	// +kubebuilder:validation:Optional
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
@@ -68,7 +66,6 @@ type GroupParameters struct {
 	ServiceRefs []v1.Reference `json:"serviceRefs,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=Service
-	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-jet-hsdp/apis/rconfig.ExtractResourceID()
 	// +crossplane:generate:reference:refFieldName=ServiceRefs
 	// +kubebuilder:validation:Optional
 	Services []*string `json:"services,omitempty" tf:"services,omitempty"`

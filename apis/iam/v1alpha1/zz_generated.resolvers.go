@@ -87,7 +87,7 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagingOrganization),
-		Extract:      rconfig.ExtractResourceID(),
+		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.OrganizationRef,
 		Selector:     mg.Spec.ForProvider.ManagingOrganizationSelector,
 		To: reference.To{
@@ -103,7 +103,7 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Roles),
-		Extract:       rconfig.ExtractResourceID(),
+		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.RoleRefs,
 		Selector:      mg.Spec.ForProvider.RolesSelector,
 		To: reference.To{
@@ -119,7 +119,7 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Services),
-		Extract:       rconfig.ExtractResourceID(),
+		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.ServiceRefs,
 		Selector:      mg.Spec.ForProvider.ServicesSelector,
 		To: reference.To{
