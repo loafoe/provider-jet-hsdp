@@ -55,6 +55,15 @@ func (l *OrgList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this PasswordPolicyList.
+func (l *PasswordPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this PropositionList.
 func (l *PropositionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

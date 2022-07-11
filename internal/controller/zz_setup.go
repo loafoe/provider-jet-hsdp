@@ -25,6 +25,7 @@ import (
 	client "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/client"
 	group "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/group"
 	org "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/org"
+	passwordpolicy "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/passwordpolicy"
 	proposition "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/proposition"
 	role "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/role"
 	service "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/service"
@@ -39,6 +40,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		client.Setup,
 		group.Setup,
 		org.Setup,
+		passwordpolicy.Setup,
 		proposition.Setup,
 		role.Setup,
 		service.Setup,
