@@ -4,7 +4,7 @@
 PROJECT_NAME := provider-jet-hsdp
 PROJECT_REPO := github.com/crossplane-contrib/$(PROJECT_NAME)
 
-export TERRAFORM_VERSION := 1.2.4
+export TERRAFORM_VERSION := 1.2.5
 
 export TERRAFORM_PROVIDER_SOURCE := philips-software/hsdp
 export TERRAFORM_PROVIDER_VERSION := 0.35.4
