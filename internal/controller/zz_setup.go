@@ -28,6 +28,7 @@ import (
 	passwordpolicy "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/passwordpolicy"
 	proposition "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/proposition"
 	role "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/role"
+	rolesharingpolicy "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/rolesharingpolicy"
 	service "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/service"
 	providerconfig "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/providerconfig"
 )
@@ -43,6 +44,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		passwordpolicy.Setup,
 		proposition.Setup,
 		role.Setup,
+		rolesharingpolicy.Setup,
 		service.Setup,
 		providerconfig.Setup,
 	} {

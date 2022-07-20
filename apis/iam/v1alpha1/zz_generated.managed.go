@@ -481,6 +481,72 @@ func (mg *Role) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this RoleSharingPolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *RoleSharingPolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this RoleSharingPolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *RoleSharingPolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Service.
 func (mg *Service) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

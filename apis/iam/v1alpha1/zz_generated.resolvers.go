@@ -188,6 +188,48 @@ func (mg *Role) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this RoleSharingPolicy.
+func (mg *RoleSharingPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.RoleRef,
+		Selector:     mg.Spec.ForProvider.RoleIDSelector,
+		To: reference.To{
+			List:    &RoleList{},
+			Managed: &Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RoleID")
+	}
+	mg.Spec.ForProvider.RoleID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetOrganizationID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.OrganizationRef,
+		Selector:     mg.Spec.ForProvider.TargetOrganizationIDSelector,
+		To: reference.To{
+			List:    &OrgList{},
+			Managed: &Org{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetOrganizationID")
+	}
+	mg.Spec.ForProvider.TargetOrganizationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.OrganizationRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Service.
 func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
