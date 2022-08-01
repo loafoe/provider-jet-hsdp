@@ -21,6 +21,8 @@ import (
 
 	"github.com/crossplane/terrajet/pkg/controller"
 
+	app "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/edge/app"
+	config "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/edge/config"
 	application "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/application"
 	client "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/client"
 	emailtemplate "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/emailtemplate"
@@ -38,6 +40,8 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		app.Setup,
+		config.Setup,
 		application.Setup,
 		client.Setup,
 		emailtemplate.Setup,

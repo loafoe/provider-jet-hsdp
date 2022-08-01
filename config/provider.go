@@ -20,6 +20,7 @@ import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
+	"github.com/crossplane-contrib/provider-jet-hsdp/config/edge"
 	"github.com/crossplane-contrib/provider-jet-hsdp/config/iam"
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -55,6 +56,8 @@ func GetProvider() *tjconfig.Provider {
 			"hsdp_iam_password_policy$",
 			"hsdp_iam_role_sharing_policy$",
 			"hsdp_iam_email_template$",
+			"hsdp_edge_app$",
+			"hsdp_edge_config$",
 		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
@@ -69,6 +72,8 @@ func GetProvider() *tjconfig.Provider {
 		iam.PasswordPolicyConfigure,
 		iam.RoleSharingPolicyConfigure,
 		iam.EmailTemplateConfigure,
+		edge.ApplicationConfigure,
+		edge.ConfigConfigure,
 	} {
 		configure(pc)
 	}
