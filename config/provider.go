@@ -58,6 +58,7 @@ func GetProvider() *tjconfig.Provider {
 			"hsdp_iam_email_template$",
 			"hsdp_edge_app$",
 			"hsdp_edge_config$",
+			"hsdp_edge_custom_cert$",
 		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
@@ -74,6 +75,7 @@ func GetProvider() *tjconfig.Provider {
 		iam.EmailTemplateConfigure,
 		edge.ApplicationConfigure,
 		edge.ConfigConfigure,
+		edge.CustomCertConfigure,
 	} {
 		configure(pc)
 	}

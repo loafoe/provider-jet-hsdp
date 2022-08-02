@@ -23,6 +23,7 @@ import (
 
 	app "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/edge/app"
 	config "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/edge/config"
+	customcert "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/edge/customcert"
 	application "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/application"
 	client "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/client"
 	emailtemplate "github.com/crossplane-contrib/provider-jet-hsdp/internal/controller/iam/emailtemplate"
@@ -42,6 +43,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		app.Setup,
 		config.Setup,
+		customcert.Setup,
 		application.Setup,
 		client.Setup,
 		emailtemplate.Setup,
