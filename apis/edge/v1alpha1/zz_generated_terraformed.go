@@ -32,7 +32,7 @@ func (mg *App) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this App
 func (tr *App) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"principal[*].oauth2_password": "spec.forProvider.principal[*].oauth2PasswordSecretRef", "principal[*].password": "spec.forProvider.principal[*].passwordSecretRef", "principal[*].service_private_key": "spec.forProvider.principal[*].servicePrivateKeySecretRef", "principal[*].uaa_password": "spec.forProvider.principal[*].uaaPasswordSecretRef"}
 }
 
 // GetObservation of this App
@@ -96,7 +96,7 @@ func (tr *App) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *App) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this Config
@@ -106,7 +106,7 @@ func (mg *Config) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Config
 func (tr *Config) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"principal[*].oauth2_password": "spec.forProvider.principal[*].oauth2PasswordSecretRef", "principal[*].password": "spec.forProvider.principal[*].passwordSecretRef", "principal[*].service_private_key": "spec.forProvider.principal[*].servicePrivateKeySecretRef", "principal[*].uaa_password": "spec.forProvider.principal[*].uaaPasswordSecretRef"}
 }
 
 // GetObservation of this Config
@@ -180,7 +180,7 @@ func (mg *CustomCert) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this CustomCert
 func (tr *CustomCert) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"principal[*].oauth2_password": "spec.forProvider.principal[*].oauth2PasswordSecretRef", "principal[*].password": "spec.forProvider.principal[*].passwordSecretRef", "principal[*].service_private_key": "spec.forProvider.principal[*].servicePrivateKeySecretRef", "principal[*].uaa_password": "spec.forProvider.principal[*].uaaPasswordSecretRef"}
 }
 
 // GetObservation of this CustomCert
@@ -244,5 +244,5 @@ func (tr *CustomCert) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *CustomCert) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

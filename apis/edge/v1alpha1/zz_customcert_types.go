@@ -34,6 +34,9 @@ type CustomCertParameters struct {
 	// +kubebuilder:validation:Required
 	CertPem *string `json:"certPem" tf:"cert_pem,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	Principal []CustomCertPrincipalParameters `json:"principal,omitempty" tf:"principal,omitempty"`
+
 	// +kubebuilder:validation:Required
 	PrivateKeyPem *string `json:"privateKeyPem" tf:"private_key_pem,omitempty"`
 
@@ -42,6 +45,45 @@ type CustomCertParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Sync *bool `json:"sync,omitempty" tf:"sync,omitempty"`
+}
+
+type CustomCertPrincipalObservation struct {
+}
+
+type CustomCertPrincipalParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Oauth2ClientID *string `json:"oauth2ClientId,omitempty" tf:"oauth2_client_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Oauth2PasswordSecretRef *v1.SecretKeySelector `json:"oauth2PasswordSecretRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ServiceID *string `json:"serviceId,omitempty" tf:"service_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ServicePrivateKeySecretRef *v1.SecretKeySelector `json:"servicePrivateKeySecretRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	UaaPasswordSecretRef *v1.SecretKeySelector `json:"uaaPasswordSecretRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	UaaUsername *string `json:"uaaUsername,omitempty" tf:"uaa_username,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 // CustomCertSpec defines the desired state of CustomCert

@@ -37,11 +37,53 @@ type ConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Logging []LoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	Principal []ConfigPrincipalParameters `json:"principal,omitempty" tf:"principal,omitempty"`
+
 	// +kubebuilder:validation:Required
 	SerialNumber *string `json:"serialNumber" tf:"serial_number,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Sync *bool `json:"sync,omitempty" tf:"sync,omitempty"`
+}
+
+type ConfigPrincipalObservation struct {
+}
+
+type ConfigPrincipalParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Oauth2ClientID *string `json:"oauth2ClientId,omitempty" tf:"oauth2_client_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Oauth2PasswordSecretRef *v1.SecretKeySelector `json:"oauth2PasswordSecretRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ServiceID *string `json:"serviceId,omitempty" tf:"service_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ServicePrivateKeySecretRef *v1.SecretKeySelector `json:"servicePrivateKeySecretRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	UaaPasswordSecretRef *v1.SecretKeySelector `json:"uaaPasswordSecretRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	UaaUsername *string `json:"uaaUsername,omitempty" tf:"uaa_username,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type FirewallExceptionsObservation struct {
