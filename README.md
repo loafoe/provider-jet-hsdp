@@ -10,7 +10,7 @@ HSDP API.
 Install the provider by using the following command after changing the image tag
 to the [latest release](https://github.com/crossplane-contrib/provider-jet-hsdp/releases):
 ```
-kubectl crossplane install provider loafoe/provider-jet-hsdp:v0.0.0-32.g6a29dfa
+kubectl crossplane install provider loafoe/provider-jet-hsdp:v0.0.0-46.g76e262d
 ```
 
 You can see the API reference [here](https://doc.crds.dev/github.com/loafoe/provider-jet-hsdp).
