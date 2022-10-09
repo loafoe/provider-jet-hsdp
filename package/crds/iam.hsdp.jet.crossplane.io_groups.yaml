@@ -65,6 +65,10 @@ spec:
                 properties:
                   description:
                     type: string
+                  devices:
+                    items:
+                      type: string
+                    type: array
                   driftDetection:
                     type: boolean
                   managingOrganization:

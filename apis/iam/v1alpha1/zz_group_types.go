@@ -35,6 +35,9 @@ type GroupParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	Devices []*string `json:"devices,omitempty" tf:"devices,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	DriftDetection *bool `json:"driftDetection,omitempty" tf:"drift_detection,omitempty"`
 
 	// +crossplane:generate:reference:type=Org

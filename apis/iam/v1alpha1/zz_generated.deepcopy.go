@@ -808,6 +808,17 @@ func (in *GroupParameters) DeepCopyInto(out *GroupParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Devices != nil {
+		in, out := &in.Devices, &out.Devices
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.DriftDetection != nil {
 		in, out := &in.DriftDetection, &out.DriftDetection
 		*out = new(bool)
