@@ -1,4 +1,6 @@
-# Terrajet HSDP Provider
+# Superseded by the [Upjet based provider-hsdp](https://github.com/philips-software/provider-hsdp)
+
+## Terrajet HSDP Provider
 
 `provider-jet-hsdp` is a [Crossplane](https://crossplane.io/) provider that
 is built using [Terrajet](https://github.com/crossplane/terrajet) code
